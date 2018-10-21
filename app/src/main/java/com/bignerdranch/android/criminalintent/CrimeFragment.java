@@ -21,16 +21,20 @@ public class CrimeFragment extends Fragment {
     private Button mDateButton;
     private CheckBox mSolvedCheckBox;
 
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mCrime = new Crime();
     }
+
+
     //this method functions like the onCreate does in Activities. It's where listeners are declared and stuff like that.
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View v = inflater.inflate(R.layout.fragment_crime, container, false);
+
+        View v = inflater.inflate(R.layout.fragment_crime, container, false); //first step is to inflate the layout, and pass it to a view object
 
         mTitleField = (EditText) v.findViewById(R.id.crime_title); //this obtains the EditText View, and wires it to the mTitleField variable
         //now I add a listener which checks for any type of change in EditText:before, on, and after.
@@ -62,7 +66,6 @@ public class CrimeFragment extends Fragment {
                 mCrime.setSolved(isChecked);
             }
         });
-
 
 
         return v;
