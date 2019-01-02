@@ -23,6 +23,9 @@ public class DatePickerFragment extends DialogFragment {
     private DatePicker mDatePicker;
     public static final String EXTRA_DATE = "com.bignerdranch.android.criminalintent.date";
 
+//    This class is used to create the fragment instead of just calling the class directly.
+//    Doing so allows information to be passed from the parent fragment to the child fragment
+//    as arguments to the newInstance method
     public static DatePickerFragment newInstance(Date date) {
         Bundle args = new Bundle();
         args.putSerializable(ARG_DATE, date);
@@ -32,6 +35,9 @@ public class DatePickerFragment extends DialogFragment {
         return fragment;
     }
 
+//    Actually create the dialog within the fragment by inflating a view
+//    within an AlertDialog object and setting all the necessary options.
+//    This is the layer built on top of the fragment where the actual interface resides.
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         Date date = (Date) getArguments().getSerializable(ARG_DATE);
@@ -48,7 +54,8 @@ public class DatePickerFragment extends DialogFragment {
 
         mDatePicker = (DatePicker) v.findViewById((R.id.dialog_date_picker));
         mDatePicker.init(year, month, day, null);
-
+//      The AlertDialog is the actual object within which the view is inflated,
+//      and which also has its own options for setting the content of the view
         return new AlertDialog
                 .Builder(getActivity())
                 .setView(v)
@@ -65,7 +72,7 @@ public class DatePickerFragment extends DialogFragment {
                 })
                 .create();
     }
-
+//  Quick method to send information back to the parent fragment
     private void sendResult(int resultCode, Date date) {
         if(getTargetFragment() == null) {
             return;
